@@ -31,7 +31,8 @@
         width: 100%;
       }
       #clock {
-        fill: #ffcdfb;
+        /*fill: #ffcdfb;*/
+        fill: url(#img1);
         stroke: #000;
         stroke-linecap: round;
       }
@@ -48,6 +49,16 @@
         font-family: sans-serif;
         font-size: 80%;
       }
+
+      tfoot {
+        background-color: black;
+        color: white;
+      }
+
+      tfoot tr td {
+        line-height: 2em;
+        font-size: 32px;
+      }
     </style>
     <script language="javascript" type="text/javascript">
       function timerTick() {
@@ -57,6 +68,13 @@
           h = 30 * ((getHours() % 12) + getMinutes() / 60);
           m = 6 * getMinutes();
           s = 6 * getSeconds();
+
+          var hours = ('0' + getHours()).slice(-2);
+          var minutes = ('0' + getMinutes()).slice(-2);
+          var seconds = ('0' + getSeconds()).slice(-2);
+
+          var timeText = hours + ":" + minutes + ":" + seconds;
+//          document.getElementById('digital-time').innerHTML = "Alan o'clock";
 
           document.getElementById('h_pointer').setAttribute('transform', 'rotate(' + h + ', 50, 50)');
           document.getElementById('m_pointer').setAttribute('transform', 'rotate(' + m + ', 50, 50)');
@@ -70,24 +88,36 @@
   <body onload='timerTick()'>
     <noscript><div id='box'>Please, enable JavaScript and refresh page.</div></noscript>
     <table id='container'>
-      <tr>
-        <td>
-          <svg id='clock' viewBox='0 0 100 100' width='200' height='200'>
-            <circle id='surface' cx='50' cy='50' r='45'/>
-            <g id='pointers'>
-              <line id='h_pointer' x1='50' y1='50' x2='50' y2='27' />
-              <line id='m_pointer' x1='50' y1='50' x2='50' y2='17' />
-              <line id='s_pointer' x1='50' y1='50' x2='50' y2='13' />
-            </g>
-            <g id='numbers'>
-              <text x='43' y='18'>12</text>
-              <text x='85' y='54'>3</text>
-              <text x='47' y='91'>6</text>
-              <text x='9' y='54'>9</text>
-            </g>
-          </svg>
-        </td>
-      </tr>
-    </table>
-  </body>
+      <tbody>
+        <tr>
+          <td>
+            <svg id='clock' viewBox='0 0 100 100' width='256' height='256'>
+            <defs>
+      <pattern id="img1" patternUnits="userSpaceOnUse" width="200" height="200">
+        <image xlink:href="http://lh4.ggpht.com/N2uZn2YqLkRM_fUQ3--j6nCCS_CEpWWzx_O4pa5ob14370q984-aeGhKcKfDb-aiyvte4ZOC2Ul-r9yWarPYGA=s1024-c" x="0" y="0" width="100" height="100" />
+      </pattern>
+      </defs>
+      <circle id='surface' cx='50' cy='50' r='45'/>
+      <g id='pointers'>
+      <line id='h_pointer' x1='50' y1='50' x2='50' y2='27' />
+      <line id='m_pointer' x1='50' y1='50' x2='50' y2='17' />
+      <line id='s_pointer' x1='50' y1='50' x2='50' y2='13' />
+      </g>
+      <g id='numbers'>
+      <text x='43' y='18'>12</text>
+      <text x='85' y='54'>3</text>
+      <text x='47' y='91'>6</text>
+      <text x='9' y='54'>9</text>
+      </g>
+      </svg>
+    </td>
+  </tr>
+</tbody>
+<tfoot>
+  <tr>
+    <td><img src='http://www.clker.com/cliparts/3/b/V/b/N/7/first-birthday-cake-md.png' width='32' /> <span id="digital-time">Alan o'clock</span> <img src='http://www.clker.com/cliparts/3/b/V/b/N/7/first-birthday-cake-md.png' width='32' /></td>
+  </tr>
+</tfoot>
+</table>
+</body>
 </html>
